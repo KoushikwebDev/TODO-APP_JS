@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.main {
+  /* background-color: #e83a59; */
+  background-image: linear-gradient(#fd297a, #9424f0);
+  /* #FD297A #9424F0 */
+  /* opacity: 0.7; */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: #ff6263;
+  border-radius: 5px;
+  /* width: 400px; */
+  height: 500px;
+  padding: 20px 15px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+#text-input {
+  height: 40px;
+  width: 300px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0 5px;
+}
+
+.input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+#add-btn img {
+  width: 41px;
+}
+
+.todos-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-item-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.todo-item-container p {
+  width: 264px;
+  font-size: 20px;
+}
+
+#edit-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+#delete-btn img {
+  width: 30px;
+  height: 30px;
+}
+
+button {
+  border: none;
+}
+
+.todos-container {
+  overflow: auto;
+}
+
+@media screen and (max-width: 400px) {
+  .container {
+    height: 100vh;
+    /* background-color: black; */
+  }
+  .main {
+    display: block;
+  }
+}
