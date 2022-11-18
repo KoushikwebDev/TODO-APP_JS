@@ -40,7 +40,11 @@ const addTodo = () => {
 // Show task 😎😎
 const showTask = () => {
   let webtask = localStorage.getItem("localtask");
-  let taskObj = JSON.parse(webtask);
+  if (!webtask) {
+    taskObj = [];
+  } else {
+    taskObj = JSON.parse(webtask);
+  }
 
   let html = ``;
   taskObj.forEach((item, index) => {
