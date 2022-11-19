@@ -40,11 +40,8 @@ const addTodo = () => {
 // Show task 😎😎
 const showTask = () => {
   let webtask = localStorage.getItem("localtask");
-  if (!webtask) {
-    taskObj = [];
-  } else {
-    taskObj = JSON.parse(webtask);
-  }
+  if (!webtask) return;
+  let taskObj = JSON.parse(webtask);
 
   let html = ``;
   taskObj.forEach((item, index) => {
@@ -52,11 +49,11 @@ const showTask = () => {
  <div class="todo-item-container">
     <span id="num">${index + 1}.</span>
     <p id="todo-text">${item.task}</p>
-    <button id="delete-btn">
-        <img src="images/delete.png" alt="delete" onClick="deleteTask(${
-          item.id
-        })" />
-    </button>
+   <button id="delete-btn">
+     <img src="images/delete.png" alt="delete" onClick="deleteTask(${
+       item.id
+     })" />
+   </button>
 </div> `;
     todosContainer.innerHTML = html;
   });
