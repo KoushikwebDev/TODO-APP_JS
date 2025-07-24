@@ -228,4 +228,29 @@ button {
   .main {
     display: block;
   }
+  .input-group {
+    width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 6px 4vw 6px 4vw;
+    margin-left: -4vw;
+    margin-right: -4vw;
+  }
+  #text-input {
+    width: 100%;
+    min-width: 0;
+    font-size: 17px;
+    border-radius: 8px;
+    padding: 0 10px;
+  }
+  #add-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    margin-left: 6px;
+  }
+  #add-btn img {
+    width: 26px;
+    height: 26px;
+  }
 }
