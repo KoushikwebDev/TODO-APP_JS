@@ -68,26 +68,38 @@ addBtn.addEventListener("click", addTodo);
 
 // Enable editing mode for a todo
 window.enableEdit = function(id, task) {
+  // Remove edit mode from any other todo
+  document.querySelectorAll('.todo-item-container.edit-mode').forEach(div => {
+    div.classList.remove('edit-mode');
+    showTask();
+  });
   const todoDiv = Array.from(document.querySelectorAll('.todo-item-container')).find(div => div.getAttribute('data-id') == id);
   if (!todoDiv) return;
   const numSpan = todoDiv.querySelector('#num');
+  todoDiv.classList.add('edit-mode');
   todoDiv.innerHTML = `
     ${numSpan.outerHTML}
-    <input type="text" id="edit-input" value="${task}" style="width: 220px; font-size: 18px;" />
+    <textarea id="edit-input" style="resize: vertical; min-height: 40px; font-size: 18px; width: 100%;">${task}</textarea>
     <button id="tick-btn">
       <img src="images/tick.png" alt="save" style="width:30px;height:30px;filter: drop-shadow(0 0 2px #0f0);" />
     </button>
   `;
-  const input = todoDiv.querySelector('#edit-input');
-  input.focus();
-  input.setSelectionRange(input.value.length, input.value.length);
+  const textarea = todoDiv.querySelector('#edit-input');
+  textarea.focus();
+  textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+  // Auto-resize textarea
+  textarea.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+  });
+  textarea.dispatchEvent(new Event('input'));
   // Save on tick click
   todoDiv.querySelector('#tick-btn').onclick = function() {
     saveEdit(id);
   };
-  // Save on Enter
-  input.onkeydown = function(e) {
-    if (e.key === 'Enter') saveEdit(id);
+  // Save on Enter (with Ctrl+Enter for textarea)
+  textarea.onkeydown = function(e) {
+    if ((e.key === 'Enter' && e.ctrlKey) || (e.key === 'Enter' && e.metaKey)) saveEdit(id);
     if (e.key === 'Escape') showTask();
   };
 };
@@ -96,8 +108,8 @@ window.enableEdit = function(id, task) {
 window.saveEdit = function(id) {
   const todoDiv = Array.from(document.querySelectorAll('.todo-item-container')).find(div => div.getAttribute('data-id') == id);
   if (!todoDiv) return;
-  const input = todoDiv.querySelector('#edit-input');
-  const newValue = input.value.trim();
+  const textarea = todoDiv.querySelector('#edit-input');
+  const newValue = textarea.value.trim();
   if (!newValue) {
     alert('Task cannot be empty');
     return;
